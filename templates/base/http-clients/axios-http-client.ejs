@@ -87,6 +87,10 @@ export class HttpClient<SecurityDataType = unknown> {
         const propertyContent: any[] = (property instanceof Array) ? property : [property]
 
         for (const formItem of propertyContent) {
+          if (formItem === undefined || formItem === null) {
+            continue;
+          }
+
           const isFileType = formItem instanceof Blob || formItem instanceof File;
           formData.append(
             key,

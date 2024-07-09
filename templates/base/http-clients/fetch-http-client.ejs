@@ -107,6 +107,10 @@ export class HttpClient<SecurityDataType = unknown> {
         [ContentType.FormData]: (input: FormData) =>
             (Array.from(input.keys()) || []).reduce((formData, key) => {
                 const property = input.get(key);
+                if (property === undefined || property === null) {
+                    formData;
+                }
+
                 formData.append(
                     key,
                     property instanceof Blob ?
